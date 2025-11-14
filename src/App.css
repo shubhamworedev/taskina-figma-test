@@ -1,0 +1,199 @@
+.page-selection-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fff;
+  padding: 20px;
+}
+
+.page-selection-modal {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0px 0px 4px 0px #1414141a;
+  box-shadow: 0px 8px 15px 0px #1414141f;
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.page-selection-content {
+  padding: 32px 24px;
+}
+
+.page-item {
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+}
+
+.page-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  user-select: none;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+/* Base checkbox */
+.page-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+  cursor: pointer;
+  background: white;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* ---------- STATE A (default) ---------- */
+/* Hover shows grey tick */
+.page-checkbox[data-status="default"]:hover {
+  border: 1px solid #bdbdbd;
+}
+
+.page-checkbox[data-status="default"]:hover::after {
+  content: "✓";
+  color: #9CA3AF;
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- STATE B (hoverBlue) ---------- */
+/* Box remains white normally */
+.page-checkbox[data-status="hoverBlue"] {
+  background: white;
+}
+
+/* Hover shows BLUE background + white tick */
+.page-checkbox[data-status="hoverBlue"]:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.page-checkbox[data-status="hoverBlue"]:hover::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ---------- STATE C (disabledHover) ---------- */
+/* No tick on hover */
+.page-checkbox[data-status="disabledHover"] {
+  background: white;
+  border: 1px solid #e1e1e1;
+}
+
+.page-checkbox[data-status="disabledHover"]:hover {
+  border: 1px solid #bdbdbd;
+}
+
+.page-checkbox[data-status="disabledHover"]:hover::after {
+  content: none;
+  border: 1px solid #BDBDBD;
+}
+
+/* ---------- STATE D (checked) ---------- */
+/* Always blue */
+.page-checkbox[data-status="checked"] {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+.page-checkbox[data-status="checked"]::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Hover: darker blue (not white background) */
+.page-checkbox[data-status="checked"]:hover {
+    background: #5087F8; /* darker blue */
+    border-color: #5087F8;
+}
+
+.page-text {
+  font-size: 16px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.page-item:first-child .page-text {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.page-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 8px 0 8px 0;
+}
+
+.done-button {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 24px;
+    background: #FFCE22;
+  color: #1F2128;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 130%;
+  box-shadow: 0 4px 12px rgba(252, 211, 77, 0.3);
+}
+
+.done-button:hover {
+  background-color: #FFD84D;
+}
+
+.done-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .page-selection-modal {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .page-selection-content {
+    padding: 24px 16px;
+  }
+
+  .page-checkbox {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
+  }
+
+  .page-text {
+    font-size: 14px;
+    color: #1F2128;
+    font-weight: 400;
+  }
+
+  .done-button {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
