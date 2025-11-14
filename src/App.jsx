@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import PageSelectionModal from "./components/PageSelectionModal";
 
 const App = () => {
   const [selectedPages, setSelectedPages] = useState({
@@ -15,11 +16,10 @@ const App = () => {
       const s = prev[page].status;
 
       let next;
-
-      if (s === "default") next = "hoverBlue"; // Click 1
-      else if (s === "hoverBlue") next = "disabledHover"; // Click 2
-      else if (s === "disabledHover") next = "checked"; // Click 3
-      else if (s === "checked") next = "disabledHover"; // Click 4+
+      if (s === "default") next = "hoverBlue";
+      else if (s === "hoverBlue") next = "disabledHover";
+      else if (s === "disabledHover") next = "checked";
+      else if (s === "checked") next = "disabledHover";
 
       return {
         ...prev,
@@ -31,53 +31,17 @@ const App = () => {
   const handleDone = () => {
     alert(
       `Selected pages: ${Object.keys(selectedPages)
-        .filter((key) => selectedPages[key] && key !== "all")
+        .filter((key) => key !== "all")
         .join(", ")}`
     );
   };
 
   return (
-    <div className="page-selection-container">
-      <div className="page-selection-modal">
-        <div className="page-selection-content">
-          <div className="page-item">
-            <label className="page-label">
-              <span className=" ">All pages</span>
-              <input
-                type="checkbox"
-                className="page-checkbox"
-                data-status={selectedPages.all.status}
-                onChange={() => handleCheckboxChange("all")}
-              />
-            </label>
-          </div>
-
-          <div className="page-divider"></div>
-
-          {[1, 2, 3, 4].map((page) => {
-            return (
-              <div className="page-item">
-                <label className="page-label">
-                  <span className="page-text">Page {page}</span>
-
-                  <input
-                    type="checkbox"
-                    className="page-checkbox"
-                    data-status={selectedPages[`page${page}`].status}
-                    onChange={() => handleCheckboxChange(`page${page}`)}
-                  />
-                </label>
-              </div>
-            );
-          })}
-          <div className="page-divider"></div>
-
-          <button className="done-button" onClick={handleDone}>
-            Done
-          </button>
-        </div>
-      </div>
-    </div>
+    <PageSelectionModal
+      selectedPages={selectedPages}
+      handleCheckboxChange={handleCheckboxChange}
+      onDone={handleDone}
+    />
   );
 };
 
